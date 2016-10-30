@@ -1,0 +1,18 @@
+######################
+## Make Like File
+## Olivia Leeeson
+## Case Study 1
+## October 31, 2016 
+#####################
+
+# Set working directory
+# setwd("/Users/Olivia/SMUDS/MSDS6306/study1test")
+
+# Gather and clean raw data files
+source("1Gather.R")
+source("3edclean.R")
+source("2gdpclean.R")
+
+# Merge clean data frames
+# Creates .csv file 
+source("4mergegpdedu.R")
