@@ -125,7 +125,11 @@ $(document).ready(function () {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The purpose of this paper is to explore the GDPs and income groups of the countries of the world. We have data that has been pulled from the worldbank online databank for the countries that have records of reported GDP among other data. We have two raw csv files: one containing the GDP information and another containing other important economic statistics such as income group. The worldbank data are updated retroactively to reflect the most recent updates on the 2015 statistics.</p>
+<p>The purpose of this paper is to explore the GDPs and income groups of the countries of the world. We have data that has been pulled from the worldbank online databank for the countries that have records of reported GDP among other data.</p>
+<p>The source URLs are:</p>
+<p>EDU data: <a href="http://data.worldbank.org/data-catalog/ed-stats" class="uri">http://data.worldbank.org/data-catalog/ed-stats</a></p>
+<p>GDP data: <a href="http://data.worldbank.org/data-catalog/GDP-ranking-table" class="uri">http://data.worldbank.org/data-catalog/GDP-ranking-table</a></p>
+<p>We have two raw csv files: one containing the GDP information and another containing other important economic statistics such as income group. The worldbank data are updated retroactively to reflect the most recent updates on the 2015 statistics.</p>
 <p>Our goal is to answer the following questions:</p>
 <ol style="list-style-type: decimal">
 <li><p>How many of the IDs match from the merged data sets?</p></li>
@@ -173,21 +177,21 @@ summary(both, n=3)</code></pre>
 <h1>Analysis</h1>
 <div id="section" class="section level2">
 <h2>1</h2>
-<p>After we merge our two data sets, how many of the IDs match?</p>
+<p><strong>After we merge our two data sets, how many of the IDs match?</strong></p>
 <pre class="r"><code>length(both$C_Code)</code></pre>
 <pre><code>## [1] 189</code></pre>
 <p>189 Country Codes match.</p>
 </div>
 <div id="section-1" class="section level2">
 <h2>2</h2>
-<p>Which country ranks #13 in the ascending list of GDPs?</p>
+<p><strong>Which country ranks #13 in the ascending list of GDPs?</strong></p>
 <pre class="r"><code>length(both$C_Code)</code></pre>
 <pre><code>## [1] 189</code></pre>
-<p>13th Country in sorted descending dataframe is St. Kitts and Nevis</p>
+<p>The 13th Country in sorted descending dataframe is St. Kitts and Nevis.</p>
 </div>
 <div id="section-2" class="section level2">
 <h2>3</h2>
-<p>What is the average GDP rankings for the High Income: OECD countries?</p>
+<p><strong>What is the average GDP rankings for the High Income: OECD countries?</strong></p>
 <pre class="r"><code>both$Rank &lt;- as.numeric(gsub(&quot;[^[:digit:]]&quot;,&quot;&quot;, both$ID))
 highoecd &lt;- (both$Rank[both$Income.Group==&quot;High income: OECD&quot;])
 sumhighoecd &lt;- sum(highoecd)
@@ -196,7 +200,7 @@ avghighoecd &lt;- sumhighoecd/counthighoecd
 avghighoecd</code></pre>
 <pre><code>## [1] 32.96667</code></pre>
 <p>The average GDP rankings for the High Income: OECD countries is 32.9, or about 33.</p>
-<p>What is the average GDP rankings for the High Income: nonOECD countries?</p>
+<p><strong>What is the average GDP rankings for the High Income: nonOECD countries?</strong></p>
 <pre class="r"><code>highnon &lt;- (both$Rank[both$Income.Group==&quot;High income: nonOECD&quot;])
 sumhighnon &lt;- sum(highnon)
 counthighnon&lt;- length(highnon)
@@ -204,11 +208,11 @@ avghighnon&lt;- sumhighnon/counthighnon
 avghighnon</code></pre>
 <pre><code>## [1] 91.91304</code></pre>
 <p>The average GDP rankings for the High Income: nonOECD countries is 91.9, or about 92.</p>
-<p>The average rankings of the High Income countries shows that the countries in OECD have, on average, higher GDPs thank those countries with high incomes but are not part of OECD.</p>
+<p>The average rankings of the High Income countries shows that the countries in OECD have, on average, higher GDPs than those countries with high incomes but are not part of OECD.</p>
 </div>
 <div id="section-3" class="section level2">
 <h2>4</h2>
-<p>Scatter Plot of GDP for all Countries</p>
+<p><strong>Scatter Plot of GDP for all Countries</strong></p>
 <pre class="r"><code>library(ggplot2)
 p &lt;- ggplot(both, aes(Rank,GDP_Mills))
 P &lt;- p + geom_point()
@@ -223,7 +227,7 @@ p</code></pre>
 </div>
 <div id="section-4" class="section level2">
 <h2>5</h2>
-<p>GDP Rankings versus Income Group</p>
+<p><strong>GDP Rankings versus Income Group</strong></p>
 <pre class="r"><code>both$qnt &lt;- cut(both$Rank, breaks=quantile(both$Rank, probs=seq(0,1,0.2)), labels=1:5, include.lowest=TRUE)
 otable &lt;- table(both$Income.Group, both$qnt)
 otable</code></pre>
