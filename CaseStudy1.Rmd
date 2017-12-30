@@ -10,7 +10,7 @@ output:
 
   
          
-Introduction 
+#Introduction 
 
 The purpose of this paper is to explore the GDPs and income groups of the countries of the world. We have data that has been pulled from the worldbank online databank for the countries that have records of reported GDP among other data. 
 
@@ -41,6 +41,7 @@ GDP?
   
     
 #The Data
+
 ####Important Note: *Please set your working directory to the directory containing the downloaded files from Github*
   
   
@@ -54,7 +55,9 @@ Our remaining dataset includes 189 countries with data on the the GDP in Million
 
 
 #Analysis
+
 ##1
+
 **After we merge our two data sets, how many of the IDs match?**
 ```{r}
 length(both$C_Code)
@@ -62,14 +65,19 @@ length(both$C_Code)
 189 Country Codes match.
 
 ##2
+
 **Which country ranks #13 in the ascending list of GDPs?**
+
 ```{r}
 length(both$C_Code)
 ```
+
 The 13th Country in sorted descending dataframe is St. Kitts and Nevis. 
 
 ##3
+
 **What is the average GDP rankings for the High Income: OECD countries?**
+
 ```{r}
 both$Rank <- as.numeric(gsub("[^[:digit:]]","", both$ID))
 highoecd <- (both$Rank[both$Income.Group=="High income: OECD"])
@@ -93,7 +101,9 @@ The average GDP rankings for the High Income: nonOECD countries is 91.9, or abou
 The average rankings of the High Income countries shows that the countries in OECD have, on average, higher GDPs than those countries with high incomes but are not part of OECD.
 
 ##4
+
 **Scatter Plot of GDP for all Countries**
+
 ```{r}
 library(ggplot2)
 p <- ggplot(both, aes(Rank,GDP_Mills))
@@ -103,6 +113,7 @@ p
 ```
   
   The United States clearly has the highest GDP by far. The scatter plot is hard to read because the U.S. is an outlier for this data. We can see that there is a huge GDP disparity between the top 5 countries and the rest. 
+  
 ```{r}
 tail(both$C_Code, n=5)
 ```
@@ -110,7 +121,9 @@ The top 5 countries in GDP are USA, China, Japan, Germany, and France
 
 
 ##5 
+
 **GDP Rankings versus Income Group**
+
 ```{r}
 both$qnt <- cut(both$Rank, breaks=quantile(both$Rank, probs=seq(0,1,0.2)), labels=1:5, include.lowest=TRUE)
 otable <- table(both$Income.Group, both$qnt)
@@ -126,4 +139,5 @@ There are 5 countries that are lower-middle income but among the top 38 nations 
   
   
 #Conclusion
+
 By running analysis on countries given their GDP and Income Groups we can glean insights into which countries lead the world in production and consumption. We have discovered that a few countries have disproportionally high GDPs, and that most countries have relatively similar GDPs. We can also see that the Income Group is a good indication of how high that country's GDP will be, but there are still cases where low income countries have high GDPs. This is likely due to the fact that GDP is calculated on a number of other factors besides income. There is much more analysis that we can explore with this data. Please use this data as presented on github to contribute to this analysis. 
