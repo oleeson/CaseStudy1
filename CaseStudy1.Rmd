@@ -10,8 +10,7 @@ output:
 
   
          
-#Introduction 
-
+Introduction 
 The purpose of this paper is to explore the GDPs and income groups of the countries of the world. We have data that has been pulled from the worldbank online databank for the countries that have records of reported GDP among other data. 
 
 The source URLs are:   
